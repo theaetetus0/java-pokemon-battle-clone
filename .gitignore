@@ -1,0 +1,13 @@
+# build output
+build/
+target/
+*.class
+
+# save data written by the game
+caughtPokemon.txt
+
+# editor / OS files
+.vscode/
+.idea/
+*.iml
+*:Zone.Identifier
