@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.example</groupId>
+  <groupId>io.github.theaetetus0</groupId>
   <artifactId>java-pokemon-battle-clone</artifactId>
   <version>0.1.0</version>
   <packaging>jar</packaging>
@@ -37,7 +37,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>Main</mainClass>
+              <mainClass>io.github.theaetetus0.pokemonbattle.Main</mainClass>
             </manifest>
           </archive>
         </configuration>

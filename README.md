@@ -99,6 +99,34 @@ they're not very effective, and **1×** otherwise.
   session are added to `caughtPokemon.txt` with the number of Pokeballs each
   one took.
 
+## Changing the Pokemon, moves and types
+
+All game content is in three CSV files in
+[`src/main/resources/data/`](src/main/resources/data/), so you can add or
+change Pokemon without touching any Java code.
+
+| File | One row per | Columns |
+|------|-------------|---------|
+| `pokemon.csv` | species, in starter menu order | `name,type,health,attack,defence,move1,move2,move3,move4` |
+| `moves.csv` | move | `name,type,category,amount` |
+| `types.csv` | type matchup | `attacker,defender,multiplier` |
+
+- A Pokemon's moves refer to moves by name. `move1` is required, and the
+  rest can be left blank.
+- A move's `category` is `attack`, `raise_attack` or `raise_defence`. Buff
+  moves need an `amount`, and attacks leave it blank.
+- Any type pair that isn't in `types.csv` does normal (1×) damage, and
+  `Normal` moves always do 1×. The type hints on the starter menu are
+  generated from this file.
+- Lines starting with `#` are comments.
+
+The files are checked when the game starts. A mistake stops the game with a
+message that names the file and line, for example:
+
+```
+Could not load game data: pokemon.csv line 7: unknown move "Ember Blast" (add it to moves.csv)
+```
+
 ## Running the tests
 
 ```sh
@@ -109,28 +137,46 @@ The tests use JUnit 5 and cover:
 
 | Test class | What it checks |
 |------------|----------------|
-| `PokemonTest` | Damage, fainting, healing limits, and the attack and defence caps |
-| `SpeciesTest` | All 10 species have valid types, stats and moves, and invalid numbers are rejected |
-| `BattleTest` | Type matchups, damage from each move, buffs, and catch chance |
-| `InputTest` | Invalid input is rejected and the player is asked again, and potions are refused when they can't be used |
-| `SaveFileTest` | Format of `caughtPokemon.txt`, and that each session is appended |
+| `PokemonTest` | Damage, fainting, healing limits, the attack and defence caps, and restoring |
+| `GameDataTest` | The bundled data loads and matches the original stats, and bad CSV files give clear errors |
+| `TypeChartTest` | Type matchups, case-insensitive type names, and the starter menu type hints |
+| `BattleTest` | The damage formula, effectiveness, buffs, catch chance, potion rules, and whole battles that are won, lost and caught |
+| `ConsoleTest` | Invalid input is rejected and the player is asked again |
+| `GameTest` | The full game: starter menu, wild Pokemon choice, healing between battles, and saving catches |
+| `CaughtLogTest` | Format of `caughtPokemon.txt`, and that each session is appended |
+
+Battles use random numbers, so the tests pass in a fixed `Random` to make
+each battle play out the same way every time.
 
 ## Project layout
 
+All code is in the `io.github.theaetetus0.pokemonbattle` package.
+
 ```
-src/main/java/
-  Main.java        game loop, battle logic, type chart, input and saving
-  Pokemon.java     base class with stats, damage, healing and buffs
-  <Species>.java   one class per Pokemon, defining its move names and buff amounts
-src/test/java/     JUnit tests
-run.sh             compile and run without Maven
-mvnw, mvnw.cmd     Maven Wrapper
+src/main/java/io/github/theaetetus0/pokemonbattle/
+  Main.java           starts the game
+  Game.java           starter menu, the loop of wild battles, and saving at the end
+  Battle.java         one battle: turns, moves, damage, potions and catching
+  Pokemon.java        a Pokemon's current health and buffed stats
+  Species.java        a species' fixed data: type, base stats and moves
+  Move.java           a move's name, type, category and buff amount
+  MoveCategory.java   attack, attack buff or defence buff
+  TypeChart.java      type effectiveness table
+  Player.java         the player's Pokemon, bag and caught list
+  Bag.java            potions
+  Console.java        reading choices and printing text
+  CaughtLog.java      writes caughtPokemon.txt
+  GameData.java       loads and checks the CSV files
+  CsvFile.java        small CSV reader used by GameData
+src/main/resources/data/
+  pokemon.csv, moves.csv, types.csv
+src/test/java/        JUnit tests
+run.sh                compile and run without Maven
+mvnw, mvnw.cmd        Maven Wrapper
 ```
 
 ## Roadmap
 
-- Load Pokemon and moves from a data file instead of one class per species
-- Split `Main` into `Battle`, `TypeChart` and `Player` classes
 - Rebalance damage so it scales with attack ÷ defence, with some random spread
 - Speed, levels and XP, a team of up to 6 with switching, and status effects
 - More types, trainer battles, a shop, and saving and loading

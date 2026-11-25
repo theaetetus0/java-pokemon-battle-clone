@@ -1,0 +1,9 @@
+# How much damage a move of the attacking type does to a Pokemon of the defending type.
+# Any pair not listed does normal (1x) damage, and Normal moves are always 1x.
+attacker,defender,multiplier
+Fire,Water,0.5
+Fire,Grass,2
+Water,Fire,2
+Water,Grass,0.5
+Grass,Water,2
+Grass,Fire,0.5

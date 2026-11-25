@@ -1,0 +1,15 @@
+# Every Pokemon species, in the order they appear on the starter menu.
+#
+# type      - a type from types.csv
+# move1-4   - names from moves.csv; move1 is required, the rest can be left blank
+name,type,health,attack,defence,move1,move2,move3,move4
+Charmander,Fire,39,52,43,Scratch,Ember,Dragon Dance,Defence Curl
+Squirtle,Water,44,48,65,Tackle,Water Gun,Rain Dance,Protect
+Bulbasaur,Grass,45,49,49,Scratch,Razor Leaf,Growth,Smoke Screen
+Cyndaquil,Fire,39,52,43,Quick Attack,Flame Wheel,Sword Dance,Coil
+Oshawott,Water,55,55,45,Double Hit,Surf,Shell Smash,Harden
+Treecko,Grass,40,45,35,Tackle,Seed Bomb,Nasty Plot,Cotton Guard
+Chimchar,Fire,44,58,44,Giga Impact,Fire Punch,Double Edge,Iron Defence
+Froakie,Water,41,56,40,Hyper Beam,Water Fall,Howl,Barrier
+Turtwig,Grass,55,68,64,Body Slam,Vine Whip,Bulk Up,Endure
+Talonflame,Fire,78,81,71,Feint,Flare Blitz,Agility,Substitute

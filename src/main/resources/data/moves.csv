@@ -1,0 +1,45 @@
+# Every move a Pokemon can know.
+#
+# name      - must be unique; pokemon.csv refers to moves by this name
+# type      - Normal, or a type from types.csv
+# category  - attack, raise_attack or raise_defence
+# amount    - how much a raise_attack / raise_defence move adds; leave blank for attacks
+name,type,category,amount
+Body Slam,Normal,attack,
+Double Hit,Normal,attack,
+Feint,Normal,attack,
+Giga Impact,Normal,attack,
+Hyper Beam,Normal,attack,
+Quick Attack,Normal,attack,
+Scratch,Normal,attack,
+Tackle,Normal,attack,
+Ember,Fire,attack,
+Fire Punch,Fire,attack,
+Flame Wheel,Fire,attack,
+Flare Blitz,Fire,attack,
+Surf,Water,attack,
+Water Fall,Water,attack,
+Water Gun,Water,attack,
+Razor Leaf,Grass,attack,
+Seed Bomb,Grass,attack,
+Vine Whip,Grass,attack,
+Agility,Normal,raise_attack,10
+Bulk Up,Normal,raise_attack,5
+Double Edge,Normal,raise_attack,8
+Dragon Dance,Normal,raise_attack,10
+Growth,Normal,raise_attack,7
+Howl,Normal,raise_attack,9
+Nasty Plot,Normal,raise_attack,9
+Rain Dance,Normal,raise_attack,5
+Shell Smash,Normal,raise_attack,6
+Sword Dance,Normal,raise_attack,9
+Barrier,Normal,raise_defence,6
+Coil,Normal,raise_defence,6
+Cotton Guard,Normal,raise_defence,6
+Defence Curl,Normal,raise_defence,5
+Endure,Normal,raise_defence,10
+Harden,Normal,raise_defence,9
+Iron Defence,Normal,raise_defence,7
+Protect,Normal,raise_defence,10
+Smoke Screen,Normal,raise_defence,8
+Substitute,Normal,raise_defence,10
